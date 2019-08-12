@@ -133,3 +133,19 @@ agm-map {
 	font-size	: 11px;
 }
 
+
+:host /deep/ div#demoapptable_filter label {
+    color: white !important;
+}
+
+:host /deep/ div#demoapptable_info {
+    color: white !important;
+}
+
+:host /deep/ a#demoapptable_previous {
+    color: white !important;
+}
+
+:host /deep/ a#demoapptable_next {
+    color: white !important;
+}

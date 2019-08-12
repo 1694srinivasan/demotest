@@ -27,6 +27,8 @@ export class LoginService {
     private getmetricadatalist: string = this.configservice.get("API_URL") + 'getmetricadata';
     private getdropdownlist: string = this.configservice.get("API_URL") + 'dropdownlist';
     private addmetrictolist: string = this.configservice.get("API_URL") + 'addmetricadata';
+    private deletemetrictolist: string = this.configservice.get("API_URL") + 'deletemetricadata';
+
 
     constructor(private _http: HttpClient , private configservice: ConfigService,private loadingService: LoadingService , private _router:Router, private toastr: ToastrService) {   }
 
@@ -136,6 +138,28 @@ export class LoginService {
 			 data => {
                 this.loadingService.hideLoading();
                 this.toastr.success(data['message'],'Hey There' )
+                resolve(data)
+			},
+			err => {
+                this.loadingService.hideLoading();
+                this.toastr.error( err.error['message'] ,'Hey There' )
+			});
+		})
+
+    }
+
+    deletemetric(met_id:any){
+        this.loadingService.showLoading();
+        var token = localStorage.getItem('token');
+		var username = localStorage.getItem('username');
+        var headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded' ,'Authorization' : '{"name":"' + username + '","token": "' + token + '"}'});
+        var creds = 'met_id=' + met_id;
+		return new Promise((resolve) => {
+		this._http.post(this.deletemetrictolist,creds,{headers : headers})
+		.subscribe(
+			 data => {
+                this.loadingService.hideLoading();
+                this.toastr.error(data['message'],'Hey There' )
                 resolve(data)
 			},
 			err => {

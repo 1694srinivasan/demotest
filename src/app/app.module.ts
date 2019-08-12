@@ -48,7 +48,7 @@ declare var require: any;
     RouterModule,
     FusionChartsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAePKIQacLaXWtMu2kEhVMsMsXJkHvFbHQ'
+      apiKey: 'AIzaSyDOkFIXQcEwUolnGnylmBbaukX8NsrvCuU'
     }),
     // tslint:disable-next-line: max-line-length
     ChartModule.forRoot(require('highcharts/highstock'), require('highcharts/modules/exporting'), require('highcharts/modules/annotations'), require('highcharts/highcharts-more'), require('highcharts/modules/solid-gauge'), require('highcharts/modules/drilldown')),

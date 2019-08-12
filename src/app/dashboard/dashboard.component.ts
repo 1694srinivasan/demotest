@@ -3,6 +3,7 @@ import { LoginService } from '../loginmodule/loginmodule.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AmChartsService, AmChart } from '@amcharts/amcharts3-angular';
+declare var require: any
 declare var jQuery:any;
 var dt = require( 'datatables.net' );
 
@@ -18,6 +19,8 @@ export class DashboardComponent implements OnInit {
   memory_list:any[]=[];
   storage_list:any[]=[];
   network_list:any[]=[];
+  lat:any;
+  long:any;
   metricform = {
     servername: '',
     cpuid: '',
@@ -83,14 +86,7 @@ export class DashboardComponent implements OnInit {
   }
 
   showaddpop(){
-    this.metricform.metricid = null;
-    this.metricform.servername = '';
-    this.metricform.cpuid = null;
-    this.metricform.memoryid = null;
-    this.metricform.storageid = null;
-    this.metricform.ipaddress = '';
-    this.metricform.networkid = null;
-    this.metricform.location = '';
+    this.cancel();
   }
 
   cancel(){
@@ -106,8 +102,34 @@ export class DashboardComponent implements OnInit {
 
   savemetric(){
     this.loginservice.addmetric(this.metricform).then(res=>{
-      console.log(res)
+      if (jQuery.fn.dataTable.isDataTable('#demoapptable')) 
+        {
+          jQuery('#demoapptable').DataTable().clear().destroy();               
+        }
+        this.cancel();
+        this.gettabledata();
     })
+  }
+
+  deletemetric(id:any){
+    this.loginservice.deletemetric(id).then(res=>{
+      if (jQuery.fn.dataTable.isDataTable('#demoapptable')) 
+        {
+          jQuery('#demoapptable').DataTable().clear().destroy();               
+        }
+        this.cancel();
+        this.gettabledata();
+    })
+  }
+
+  loadmap(lat:any,long:any){
+    this.lat = lat;
+    this.long = long;
+  }
+
+  dmetric(id:any){
+    this.cancel();
+    this.metricform.metricid = id;
   }
 
   loadchart(){
