@@ -1,12 +1,29 @@
-<header class="h-1000" *ngIf="loggedin == true">
-  <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo" [containerInside]="false">
-    <mdb-navbar-brand><a class="navbar-brand" href="#">Asset Portfolio</a></mdb-navbar-brand>
-  </mdb-navbar>
-</header>
+<div class="preloader" *ngIf="showLoading" style="width: 100%; height : 100%; position: absolute; z-index: 50001; background-color: rgba(255,255,255,0.25)">
+    <svg class="circular" viewBox="25 25 50 50" >
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+    </svg>
+  </div>
+  <span defaultOverlayTarget></span>
+  <header class="h-1000" *ngIf="loginservice.isLoggedin">
+    <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo" [containerInside]="false">
+      <mdb-navbar-brand><a class="navbar-brand" href="#">Demo Application</a></mdb-navbar-brand>
+      <links>
+        <ul class="navbar-nav ml-auto nav-flex-icons">
+          <li class="nav-item dropdown" dropdown>
+              <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+                <mdb-icon fas icon="user"></mdb-icon> {{ crntusername }}<span class="caret"></span></a>
+              <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+                <a class="dropdown-item waves-light" mdbWavesEffect (click)="logout()">Log out</a>
+              </div>
+            </li>
+        </ul>
+      </links>
+    </mdb-navbar>
+  </header>
   <router-outlet>
   </router-outlet>
-<footer class="page-footer font-large indigo" *ngIf="loggedin == true">
-  <div class="footer-copyright text-center py-3">© 2018 Copyright:
-    <a href="https://mdbootstrap.com/education/angular/"> MDBootstrap.com</a>
-  </div>
-</footer>
+  <footer class="page-footer font-large indigo" *ngIf="loginservice.isLoggedin">
+    <div class="footer-copyright text-center py-3">© 2018 Copyright:
+      <a href="https://mdbootstrap.com/education/angular/"> MDBootstrap.com</a>
+    </div>
+  </footer>

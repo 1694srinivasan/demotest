@@ -1,6 +1,8 @@
-.view {
-    height: 100% !important;
-
+section.view.mainbg {
+    background-color: #21668D !important;
+}
+mdb-navbar-brand {
+    height: 40px !important;
 }
 :host /deep/ nav.navbar.navbar-expand-lg.navbar-dark.indigo {
     background-color: #171745 !important;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from './loginmodule.service';
 import { Router } from '@angular/router';
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-loginmodule',
@@ -13,34 +13,27 @@ export class LoginmoduleComponent implements OnInit {
     emailid: '',
     password: ''
   };
-  loggedin: boolean;
 
   constructor(private loginservice: LoginService,
-    private _router: Router) { }
+    private _router: Router,
+    private toastr: ToastrService) { }
 
   ngOnInit() {
-    if (localStorage.getItem('login') === 'true') {
-      this.loggedin = true;
-      this._router.navigate(['charttypes']);
+    if (localStorage.getItem('token')) {
+      this.loginservice.isLoggedin = true;
+      this._router.navigate(['dashboard']);
     } else {
-      this.loggedin = false;
+      this.loginservice.isLoggedin = false;
       this._router.navigate(['login']);
     }
   }
 
-  login() {
-    if (this.localUser.emailid === 'demo@example.com' && this.localUser.password === 'demodemo') {
-      // tslint:disable-next-line: prefer-const
-      let a = true;
-      this.loginservice.setloggedin(a);
-      this._router.navigate(['charttypes']);
-    } else {
-      alert('Credentials is worng');
-      // tslint:disable-next-line: prefer-const
-      let a = false;
-      this.loginservice.setloggedin(a);
-      this._router.navigate(['login']);
-    }
+  login(email:any,password:any) {
+    this.loginservice.loginfn(email,password).then((res) => {
+			this.loginservice.isLoggedin = true;
+			this._router.navigate(['dashboard']);
+		})
   }
+
 
 }

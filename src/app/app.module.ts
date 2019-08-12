@@ -20,16 +20,20 @@ FusionChartsModule.fcRoot(FusionCharts, Charts , Fusion , Candy , PowerCharts);
 import { AppComponent } from './app.component';
 import { CharttypesComponent } from './charttypes/charttypes.component';
 import { LoginmoduleComponent } from './loginmodule/loginmodule.component';
-
 import { LoginService } from './loginmodule/loginmodule.service';
-
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ToastrModule } from 'ngx-toastr';
+import { ConfigService } from './config.service';
+import { LoadingService } from './loading.service';
+import { HttpClientModule } from '@angular/common/http';
 declare var require: any;
 
 @NgModule({
   declarations: [
     AppComponent,
     CharttypesComponent,
-    LoginmoduleComponent
+    LoginmoduleComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -45,10 +49,16 @@ declare var require: any;
     FusionChartsModule,
     // tslint:disable-next-line: max-line-length
     ChartModule.forRoot(require('highcharts/highstock'), require('highcharts/modules/exporting'), require('highcharts/modules/annotations'), require('highcharts/highcharts-more'), require('highcharts/modules/solid-gauge'), require('highcharts/modules/drilldown')),
-    AmChartsModule
+    AmChartsModule,
+    ToastrModule.forRoot({
+      timeOut: 50000,
+      positionClass: 'toast-top-right',
+      preventDuplicates : false,
+    }),
+    HttpClientModule
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
-  providers: [LoginService],
+  providers: [LoginService,ConfigService,LoadingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
