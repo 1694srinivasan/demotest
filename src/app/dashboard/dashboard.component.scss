@@ -1,0 +1,119 @@
+.view {
+    height: 100% !important;
+    overflow: auto !important;
+}
+section.view.mainbg {
+    background-color: #21668D !important;
+}
+
+.titlearea{
+    text-align: left
+}
+
+.buttonarea {
+    text-align: right
+}
+
+.tablebtn{
+    padding: 0.5rem !important;
+    margin: 0rem !important;
+}
+
+.modal-content {
+    background-color: #1F335A;
+}
+h4#myModalLabel {
+    color: white;
+    text-align: center;
+}
+input.dashboardformfields {
+    background-color: #1f335a;
+    color: white !important;
+}
+select.dashboardformfields{
+    background-color: #1f335a;
+    color: white !important;
+}
+
+mdb-card.formcard.card {
+    margin-top: 30px !important;
+    margin-right: 30px !important;
+    margin-left: 30px !important;
+    margin-bottom: 10px !important;
+    font-size: 20px !important;
+    background-color: #1F335A !important;
+    font-family: Montserrat !important;
+}
+
+mdb-card.chartcard2.card {
+    margin : 30px !important;
+    font-size: 20px !important;
+    background-color: #1F335A !important;
+    font-family: Montserrat !important;
+}
+
+mdb-card-header.white-text.indigo.card-header {
+    background-color: #1F335A !important;
+    font-family: Montserrat !important;
+}
+
+mdb-card-body.card-body {
+    background-color: #1f335a !important;
+    color: white !important;
+    font-family: Montserrat !important;
+}
+
+agm-map {
+    height: 300px;
+  }
+
+.tablearea {
+    padding: 20px !important;
+    margin-top: 10px !important;
+}
+
+.demoapptable {
+    font-family: Montserrat !important;
+    border-collapse: collapse;
+    width: 100%;
+    overflow-x:auto !important;
+    table-layout: fixed !important; 
+    word-wrap:break-word !important;
+    /* border: 1px solid  #337ab7; */
+  }
+  
+  .demoapptable tr:nth-child(even){background-color: #1F335A }
+  .demoapptable tr:nth-child(odd){background-color: #1F335A } 
+  .demoapptable tr:hover {background-color: #1F335A }
+  .demoapptable .icons{
+    font-size: 15px !important;
+  }
+  .demoapptable th{
+    padding: 20px 15px;
+    text-align: center;
+    font-weight: 800;
+    color: white !important;
+    text-transform: uppercase;
+    font-size: 15px !important;
+    font-family: Montserrat !important;
+    border-bottom: 1px solid  #337ab7;
+  }
+  .demoapptable td{
+    padding: 15px;
+    text-align: center;
+    vertical-align:middle;
+    font-weight: 500;
+    font-size: 15px;
+    color: white;
+    font-family: Montserrat !important;
+    border-bottom: solid 1px  #337ab7;
+  }
+  
+  tfoot {
+    display: table-header-group !important;
+    vertical-align: middle;
+    border-color: inherit;
+  }
+
+
+

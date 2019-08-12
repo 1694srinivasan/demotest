@@ -21,6 +21,33 @@ export class LoginService {
 	        user_id:'' ,
 	        master:''
         }
+
+        data: any = [
+            {
+              id: 1,
+              name: 'Metrics',
+              cpus: '10',
+              memory: '250GB',
+              storage: '7',
+              ip: '74.12.156.2',
+              network: '1',
+              location: 'Miami',
+              lat: 25.7617,
+              lng: 80.1918
+            },
+            {
+              id: 1,
+              name: 'Usuage',
+              cpus: '10',
+              memory: '250GB',
+              storage: '7',
+              ip: '74.12.154.2',
+              network: '1',
+              location: 'Chennai',
+              lat: 13.0827,
+              lng: 80.2707
+            }
+          ]
         
     private LoginURL: string = this.configservice.get("API_URL");
     private getgenerallist: string = this.configservice.get("API_URL") + 'generaldetailslist';

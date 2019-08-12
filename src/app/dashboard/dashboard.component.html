@@ -1,3 +1,96 @@
-<p>
-  dashboard works!
-</p>
+<section class="view mainbg">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div mdbModal #adddata="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close pull-right white-text" aria-label="Close" (click)="adddata.hide()">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                  <h4 class="modal-title w-100 text-center" id="myModalLabel">Add Data</h4>
+                </div>
+                <div class="modal-body">
+                  <form class="text-left p-5">
+                    <label class="white-text">Input 1 : </label>
+                    <input type="text"  id="defaultContactFormName" mdbInput class="form-control mb-4 dashboardformfields" placeholder="Name">
+                    <label class="white-text">Input 2 : </label>
+                    <input type="email" id="defaultContactFormEmail" mdbInput class="form-control mb-4 dashboardformfields" placeholder="E-mail">
+                    <label class="white-text">Input 3 : </label>
+                    <select  class="browser-default custom-select mb-4 dashboardformfields">
+                      <option value="" disabled>Choose option</option>
+                      <option value="1" selected>Feedback</option>
+                      <option value="2">Report a bug</option>
+                      <option value="3">Feature request</option>
+                      <option value="4">Feature request</option>
+                    </select>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="adddata.hide()" mdbWavesEffect>Cancel</button>
+                  <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Save</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div mdbModal #mapdata="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close pull-right white-text" aria-label="Close" (click)="mapdata.hide()">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                  <h4 class="modal-title w-100 text-center" id="myModalLabel">Map Data</h4>
+                </div>
+                <div class="modal-body">
+                  <agm-map [latitude]="lat" [longitude]="lng">
+                    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                  </agm-map>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="mapdata.hide()" mdbWavesEffect>Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <mdb-card class="chartcard2">
+            <mdb-card-header class="white-text indigo" mdbWavesEffect> Jquery Data Table Demo</mdb-card-header>
+            <mdb-card-body>
+              <div class="row">
+                <div class="col-md-6 titlearea">
+                  Table List : 
+                </div>
+                <div class="col-md-6 buttonarea">
+                  <button type="button" mdbBtn color="primary" class="relative waves-light tablebtn" (click)="adddata.show()" mdbWavesEffect>Add Data</button>
+                </div>
+                <div class="col-md-12 tablearea">
+                  <div class="tbl-content">
+                    <div class="table-responsive">
+                      <table id="customers" cellpadding="0" cellspacing="0" border="0" id="demoapptable" class="demoapptable">
+                        <tr>
+                          <th>S.No</th>
+                          <th>Location</th>
+                          <th>Action</th>
+                        </tr>
+                        <tr>
+                          <td>Alfreds Futterkiste</td>
+                          <td (click)="mapdata.show()" style="cursor: pointer;">Chennai</td>
+                          <td  style="cursor: pointer;">
+                            <i class="fas fa-edit"></i>&nbsp;
+                            <i class="fas fa-trash-alt"></i>&nbsp;
+                            <i class="fas fa-binoculars"></i>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div> 
+                </div>
+              </div>
+            </mdb-card-body>
+          </mdb-card>
+        </div>
+      </div>
+    </div>
+</section>
+  
