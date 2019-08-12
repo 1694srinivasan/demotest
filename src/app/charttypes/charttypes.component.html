@@ -1,0 +1,277 @@
+<section class="view mainbg">
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark unique-color" [containerInside]="false">
+    <mdb-navbar-brand></mdb-navbar-brand>
+    <links>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link waves-light active" mdbWavesEffect>Charts<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link waves-light" mdbWavesEffect>Tables</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto nav-flex-icons">
+        <li class="nav-item dropdown" dropdown>
+            <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+              <mdb-icon fas icon="user"></mdb-icon> Profile<span class="caret"></span></a>
+            <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+              <a class="dropdown-item waves-light" mdbWavesEffect href="#">My account</a>
+              <a class="dropdown-item waves-light" mdbWavesEffect (click)="logout()">Log out</a>
+            </div>
+          </li>
+      </ul>
+    </links>
+  </mdb-navbar>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <mdb-card class="formcard">
+          <mdb-card-body>
+            <form>
+              <div class="row">
+                <div class="col-md-4">
+                  <select class="browser-default custom-select dashboardsetect">
+                      <option selected>Select Dashboard</option>
+                      <option value="1">Dashboard One</option>
+                      <option value="2">Dashboard Two</option>
+                      <option value="3">Dashboard Three</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+
+                </div>
+                <div class="col-md-2 text-right">
+                  <div class="md-form">
+                      <button mdbBtn type="button" color="primary" rounded="true" mdbWavesEffect data-toggle="modal" data-target="#basicExample"
+                      (click)="basicModal.show()" mdbWavesEffect>Add Dashboard</button>
+                      <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+                          <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h4 class="modal-title w-100" id="myModalLabel">Create New Dashboard</h4>
+                              </div>
+                              <div class="modal-body">
+                              <form class="dashboardform">
+                                <div class="form-row">
+                                  <div class="col-md-4">
+                                    <div class="md-form form-group">
+                                      <input mdbInput type="text" class="form-control" id="dashboardname" >
+                                      <label for="dashboardname">Dashboard Name</label>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <div class="md-form form-group">
+                                        <select class="browser-default custom-select createdashboardselect">
+                                            <option selected>Select Access Type</option>
+                                            <option value="1">Facility</option>
+                                            <option value="2">Organization</option>
+                                            <option value="3">Company</option>
+                                          </select>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <div class="md-form form-group">
+                                        <select class="browser-default custom-select createdashboardselect">
+                                          <option selected>Select Access For</option>
+                                          <option value="1">Admin L1</option>
+                                          <option value="2">Manager L2</option>
+                                          <option value="3">User L3</option>
+                                        </select>
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Close</button>
+                              <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Create</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+                <div class="col-md-2 text-right">
+                  <div class="md-form">
+                      <button mdbBtn type="button" color="primary" rounded="true" mdbWavesEffect>Add Widget</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </mdb-card-body>
+        </mdb-card>
+      </div>
+    </div>
+    <div class="row">
+        <div mdbModal #amchart1="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title w-100" id="myModalLabel">Multi line stack column chart data</h4>
+                </div>
+                <div class="modal-body">
+                <form class="dashboardform">
+                  <p class="datalabelchart">Replace dictionary symbol instead of [ ]</p>
+                 <pre><code>
+                    [
+                      date: 2012-01-01,
+                      distance: 227,
+                      townName: New York,
+                      townName2: New York,
+                      townSize: 25,
+                      latitude: 40.71,
+                      duration: 408
+                    ]
+                 </code></pre>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="amchart1.hide()" mdbWavesEffect>Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      <div class="col-lg-12">
+        <mdb-card class="chartcard1">
+          <mdb-card-header class="white-text indigo" data-toggle="modal" data-target="#amchart1"
+          (click)="amchart1.show()" mdbWavesEffect style="cursor: pointer;">Multiple (line and stacked column) AmChart Demo</mdb-card-header>
+          <mdb-card-body>
+            <div id="chartdiv" class="charts">
+            </div>
+          </mdb-card-body>
+        </mdb-card>
+      </div>
+      <div mdbModal #amchart2="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title w-100" id="myModalLabel">Clustered Bar & Column chart data</h4>
+              </div>
+              <div class="modal-body">
+              <form class="dashboardform">
+                <p class="datalabelchart">Replace dictionary symbol instead of [ ]</p>
+               <pre><code>
+                  [
+                    "year": 2005,
+                    "income": 23.5,
+                    "expenses": 18.1
+                  ]
+               </code></pre>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="amchart2.hide()" mdbWavesEffect>Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <mdb-card class="chartcard2">
+          <mdb-card-header class="white-text indigo" data-toggle="modal" data-target="#amchart2"
+          (click)="amchart2.show()" mdbWavesEffect style="cursor: pointer;">Clustered bar Amchart Demo</mdb-card-header>
+          <mdb-card-body>
+              <div id="clusterbarchartdiv" class="charts">
+              </div>
+          </mdb-card-body>
+        </mdb-card>
+      </div>
+      <div mdbModal #amchart3="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title w-100" id="myModalLabel">Multi Line chart & Line Area Chart data</h4>
+              </div>
+              <div class="modal-body">
+              <form class="dashboardform">
+                <p class="datalabelchart">Replace dictionary symbol instead of [ ]</p>
+               <pre><code>
+                  [
+                  "year": 2014,
+                  "income": 34.1,
+                  "expenses": 32.9,
+                  ]
+               </code></pre>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="amchart3.hide()" mdbWavesEffect>Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <mdb-card class="chartcard2">
+          <mdb-card-header class="white-text indigo" data-toggle="modal" data-target="#amchart3"
+          (click)="amchart3.show()" mdbWavesEffect style="cursor: pointer;">Multiple Line Amchart Demo</mdb-card-header>
+          <mdb-card-body>
+              <div id="multilinechartdiv" class="charts">
+              </div>
+          </mdb-card-body>
+        </mdb-card>
+      </div>
+      <div mdbModal #fusion1="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title w-100" id="myModalLabel">HeatMap chart data</h4>
+              </div>
+              <div class="modal-body">
+              <form class="dashboardform">
+                <p class="datalabelchart">Replace dictionary symbol instead of [ ]</p>
+               <pre><code>
+                  [
+                    rowid: '40',
+                    columnid: '152',
+                    value: 17,
+                    trlabel:
+                      'You are in Moderate Thinness zone. You need to increase 5 kg to be in Normal zone'
+                  ]
+               </code></pre>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="fusion1.hide()" mdbWavesEffect>Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <mdb-card class="chartcard2">
+          <mdb-card-header class="white-text indigo" data-toggle="modal" data-target="#fusion1"
+          (click)="fusion1.show()" mdbWavesEffect style="cursor: pointer;">Heat Map Fusion Chart Demo</mdb-card-header>
+          <mdb-card-body>
+              <fusioncharts class="charts"
+                width="100%"
+                height="500"
+                type="heatmap"
+                dataFormat="json"
+                [dataSource]="heatmapdataSource"
+              >
+              </fusioncharts>
+          </mdb-card-body>
+        </mdb-card>
+      </div>
+      <div class="col-lg-6">
+          <mdb-card class="chartcard2">
+            <mdb-card-header class="white-text indigo" data-toggle="modal" data-target="#amchart3"
+            (click)="amchart3.show()" mdbWavesEffect style="cursor: pointer;">Line Area Amchart Demo</mdb-card-header>
+            <mdb-card-body>
+                <div id="lineareachartdiv" class="charts">
+                  </div>
+            </mdb-card-body>
+          </mdb-card>
+        </div>
+        <div class="col-lg-6">
+          <mdb-card class="chartcard2">
+            <mdb-card-header class="white-text indigo" data-toggle="modal" data-target="#amchart2"
+            (click)="amchart2.show()" mdbWavesEffect style="cursor: pointer;">Column Amchart Demo</mdb-card-header>
+            <mdb-card-body>
+                <div id="columnchartdiv" class="charts">
+                  </div>
+            </mdb-card-body>
+          </mdb-card>
+        </div>
+    </div>
+  </div>
+  
+</section>

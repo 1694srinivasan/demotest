@@ -1,0 +1,34 @@
+<section class="view intro-2" *ngIf="loggedin == false">
+  <div class="full-bg-img mask rgba-gradient">
+    <div class="container flex-center">
+      <div class="d-flex align-items-center content-height w-100">
+        <div class="row flex-center pt-5 mt-3 w-100">
+          <div class="col-md-12 col-xl-6 offset-xl-1">
+            <mdb-card class="wow fadeInRight loginbox" data-wow-delay="0.3s">
+              <mdb-card-body>
+                <div class="text-center">
+                  <h3 class="white-text">
+                    <mdb-icon fas icon="folder" class="text-white"></mdb-icon> Asset Portfolio</h3>
+                  <hr class="hr-light">
+                </div>
+                <div class="md-form">
+                  <mdb-icon fas icon="envelope" class="text-white active"></mdb-icon>
+                  <input type="email" id="form2" class="text-white form-control" mdbInput [(ngModel)]="localUser.emailid">
+                  <label for="form2" class="text-white">Your email</label>
+                </div>
+                <div class="md-form">
+                  <mdb-icon fas icon="lock" class="text-white active"></mdb-icon>
+                  <input type="password" id="form4" class="text-white form-control" mdbInput [(ngModel)]="localUser.password">
+                  <label for="form4" class="text-white">Your password</label>
+                </div>
+                <div class="text-center mt-4">
+                  <button mdbBtn color="indigo" mdbWavesEffect (click)="login()">Login</button>
+                </div>
+              </mdb-card-body>
+            </mdb-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

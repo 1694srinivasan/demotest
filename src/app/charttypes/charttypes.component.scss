@@ -1,0 +1,107 @@
+.view {
+    height: 100% !important;
+    overflow: auto !important;
+}
+section.view.mainbg {
+    background-color: #21668D !important;
+}
+code {
+color:white !important;
+ }
+ .datalabelchart{
+     color: white !important;
+ }
+label {
+    color: white !important;
+}
+
+form.dashboardform input {
+    color: white !important;
+}
+
+select.browser-default.custom-select.dashboardsetect {
+    margin: 30px;
+    background-color: #1f335a;
+    color: white;
+}
+
+select.browser-default.custom-select.createdashboardselect {
+    background-color: #1f335a;
+    color: white;
+}
+.modal-content {
+    background-color: #1F335A;
+}
+h4#myModalLabel {
+    color: white;
+    text-align: center;
+}
+
+mdb-card.formcard.card {
+    margin-top: 30px !important;
+    margin-right: 30px !important;
+    margin-left: 30px !important;
+    margin-bottom: 10px !important;
+    font-size: 20px !important;
+    background-color: #1F335A !important;
+}
+
+mdb-card.chartcard1.card {
+    margin: 30px !important;
+    font-size: 20px !important;
+    background-color: #1F335A !important;
+}
+
+mdb-card.chartcard2.card {
+    margin : 30px !important;
+    font-size: 20px !important;
+    background-color: #1F335A !important;
+}
+mdb-navbar-brand {
+    height: 40px !important;
+}
+
+mdb-card-header.white-text.indigo.card-header {
+    background-color: #1F335A !important;
+}
+
+mdb-card-body.card-body {
+    background-color: #1f335a !important;
+    color: white !important;
+}
+
+:host /deep/ nav.navbar.navbar-expand-lg.navbar-dark.unique-color {
+    background-color: #1F335A !important;
+}
+
+.charts { 
+	display: block; 
+    width : 100%; 
+    height: 500px;
+    background-color: #1f335a;
+    color: #fff;
+    }
+
+
+#chartdiv {
+	width		: 100%;
+	height		: 500px;
+	font-size	: 11px;
+}
+
+:host /deep/ g.raphael-group-4-background rect {
+    fill:  #1f335a !important;
+}
+
+:host /deep/  rect.highcharts-background {
+    fill: #1f335a !important;
+}
+:host /deep/ g.highcharts-label.highcharts-data-label.highcharts-data-label-color-undefined text{
+    color: #ffffff !important;
+    fill:#ffffff !important;
+     }
+
+:host /deep/ ol.breadcrumb.list-inline.list-unstyled.text-{
+    background-color: #171745 !important;
+}
+
