@@ -22,35 +22,11 @@ export class LoginService {
 	        master:''
         }
 
-        data: any = [
-            {
-              id: 1,
-              name: 'Metrics',
-              cpus: '10',
-              memory: '250GB',
-              storage: '7',
-              ip: '74.12.156.2',
-              network: '1',
-              location: 'Miami',
-              lat: 25.7617,
-              lng: 80.1918
-            },
-            {
-              id: 1,
-              name: 'Usuage',
-              cpus: '10',
-              memory: '250GB',
-              storage: '7',
-              ip: '74.12.154.2',
-              network: '1',
-              location: 'Chennai',
-              lat: 13.0827,
-              lng: 80.2707
-            }
-          ]
         
     private LoginURL: string = this.configservice.get("API_URL");
-    private getgenerallist: string = this.configservice.get("API_URL") + 'generaldetailslist';
+    private getmetricadatalist: string = this.configservice.get("API_URL") + 'getmetricadata';
+    private getdropdownlist: string = this.configservice.get("API_URL") + 'dropdownlist';
+    private addmetrictolist: string = this.configservice.get("API_URL") + 'addmetricadata';
 
     constructor(private _http: HttpClient , private configservice: ConfigService,private loadingService: LoadingService , private _router:Router, private toastr: ToastrService) {   }
 
@@ -76,7 +52,6 @@ export class LoginService {
 			err => {
                 this.loadingService.hideLoading();
                 this.toastr.error( err.error['message'] ,'Hey There' )
-                // alert(err.error['message'])
 			});
 		})
 	}
@@ -109,15 +84,13 @@ export class LoginService {
 		})
     }
     
-    getgeneral(){
+    getmetricadatalistgeneral(){
 		this.loadingService.showLoading();
         var token = localStorage.getItem('token');
 		var username = localStorage.getItem('username');
         var headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded' ,'Authorization' : '{"name":"' + username + '","token": "' + token + '"}'});
-        var user_id = localStorage.getItem('user_id');
-        var creds = 'user_id='+ user_id
         return new Promise((resolve) => {     
-            this._http.post(this.getgenerallist,creds,{headers : headers})
+            this._http.get(this.getmetricadatalist,{headers : headers})
             .subscribe(
                 data => {
                         this.loadingService.hideLoading();
@@ -129,6 +102,48 @@ export class LoginService {
                     }
             )         
         });
-	}
+    }
+    
+    getdropdownlistgeneral() {
+        this.loadingService.showLoading();
+        var token = localStorage.getItem('token');
+		var username = localStorage.getItem('username');
+        var headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded' ,'Authorization' : '{"name":"' + username + '","token": "' + token + '"}'});
+        return new Promise((resolve) => {     
+            this._http.get(this.getdropdownlist,{headers : headers})
+            .subscribe(
+                data => {
+                        this.loadingService.hideLoading();
+                        resolve(data)
+                    },
+                err => {
+                        this.loadingService.hideLoading();
+                        this.toastr.error( err.error['message'] ,'Hey There' )
+                    }
+            )         
+        });
+    }
+
+    addmetric(metricform:any){
+        this.loadingService.showLoading();
+        var token = localStorage.getItem('token');
+		var username = localStorage.getItem('username');
+        var headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded' ,'Authorization' : '{"name":"' + username + '","token": "' + token + '"}'});
+        var creds = 'met_name=' + metricform.servername + '&' +'cpus=' + metricform.cpuid + '&' + 'memory=' + metricform.memoryid + '&' +'storage=' + metricform.storageid + '&' +'ipaddress=' + metricform.ipaddress + '&' + 'network=' + metricform.networkid + '&' +'location=' + metricform.location;
+		return new Promise((resolve) => {
+		this._http.post(this.addmetrictolist,creds,{headers : headers})
+		.subscribe(
+			 data => {
+                this.loadingService.hideLoading();
+                this.toastr.success(data['message'],'Hey There' )
+                resolve(data)
+			},
+			err => {
+                this.loadingService.hideLoading();
+                this.toastr.error( err.error['message'] ,'Hey There' )
+			});
+		})
+
+    }
 
 }

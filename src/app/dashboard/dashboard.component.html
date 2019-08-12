@@ -13,23 +13,37 @@
                 </div>
                 <div class="modal-body">
                   <form class="text-left p-5">
-                    <label class="white-text">Input 1 : </label>
-                    <input type="text"  id="defaultContactFormName" mdbInput class="form-control mb-4 dashboardformfields" placeholder="Name">
-                    <label class="white-text">Input 2 : </label>
-                    <input type="email" id="defaultContactFormEmail" mdbInput class="form-control mb-4 dashboardformfields" placeholder="E-mail">
-                    <label class="white-text">Input 3 : </label>
-                    <select  class="browser-default custom-select mb-4 dashboardformfields">
-                      <option value="" disabled>Choose option</option>
-                      <option value="1" selected>Feedback</option>
-                      <option value="2">Report a bug</option>
-                      <option value="3">Feature request</option>
-                      <option value="4">Feature request</option>
+                    <label class="white-text">Server Name : </label>
+                    <input type="text"  id="servername" mdbInput class="form-control mb-4 dashboardformfields" placeholder="Server Name" [(ngModel)]="metricform.servername" [ngModelOptions]="{standalone: true}" #servername="ngModel" required="">
+                    <label class="white-text">No of CPU's : </label>
+                    <select  class="browser-default custom-select mb-4 dashboardformfields" [(ngModel)]="metricform.cpuid" [ngModelOptions]="{standalone: true}" #cpuid="ngModel" required="">
+                      <option value="null">Select No of CPU's</option>
+                      <option *ngFor="let data of cpu_list" [attr.value]="data.category_item_id">{{data.item_name}}</option>
                     </select>
+                    <label class="white-text">Total Memory : </label>
+                    <select  class="browser-default custom-select mb-4 dashboardformfields" [(ngModel)]="metricform.memoryid" [ngModelOptions]="{standalone: true}" #memoryid="ngModel" required="">
+                      <option value="null">Select Total Memory</option>
+                      <option *ngFor="let data of memory_list" [attr.value]="data.category_item_id">{{data.item_name}}</option>
+                    </select>
+                    <label class="white-text">Total Storage : </label>
+                    <select  class="browser-default custom-select mb-4 dashboardformfields" [(ngModel)]="metricform.storageid" [ngModelOptions]="{standalone: true}" #storageid="ngModel" required="">
+                      <option value="null">Select Total Storage</option>
+                      <option *ngFor="let data of storage_list" [attr.value]="data.category_item_id">{{data.item_name}}</option>
+                    </select>
+                    <label class="white-text">IP Address : </label>
+                    <input type="text"  id="ipaddress" mdbInput class="form-control mb-4 dashboardformfields" placeholder="IP Address" [(ngModel)]="metricform.ipaddress" [ngModelOptions]="{standalone: true}" #ipaddress="ngModel" required="">
+                    <label class="white-text">Network : </label>
+                    <select  class="browser-default custom-select mb-4 dashboardformfields" [(ngModel)]="metricform.networkid" [ngModelOptions]="{standalone: true}" #networkid="ngModel" required="">
+                      <option value="null">Select Network</option>
+                      <option *ngFor="let data of network_list" [attr.value]="data.category_item_id">{{data.item_name}}</option>
+                    </select>
+                    <label class="white-text">Location : </label>
+                    <input type="text"  id="location" mdbInput class="form-control mb-4 dashboardformfields" placeholder="Location" [(ngModel)]="metricform.location" [ngModelOptions]="{standalone: true}" #location="ngModel" required="">
                   </form>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="adddata.hide()" mdbWavesEffect>Cancel</button>
-                  <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Save</button>
+                  <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="adddata.hide();cancel()" mdbWavesEffect>Cancel</button>
+                  <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect [disabled]="servername.errors || cpuid.errors || memoryid.errors || storageid.errors || ipaddress.errors || networkid.errors || location.errors" (click)="adddata.hide();savemetric()">Save</button>
                 </div>
               </div>
             </div>
@@ -81,26 +95,30 @@
                   Table List : 
                 </div>
                 <div class="col-md-6 buttonarea">
-                  <button type="button" mdbBtn color="primary" class="relative waves-light tablebtn" (click)="adddata.show()" mdbWavesEffect>Add Data</button>
+                  <button type="button" mdbBtn color="primary" class="relative waves-light tablebtn" (click)="adddata.show();showaddpop()" mdbWavesEffect>Add Data</button>
                 </div>
                 <div class="col-md-12 tablearea">
                   <div class="tbl-content">
                     <div class="table-responsive">
                       <table id="customers" cellpadding="0" cellspacing="0" border="0" id="demoapptable" class="demoapptable">
-                        <tr>
-                          <th>S.No</th>
-                          <th>Location</th>
-                          <th>Action</th>
-                        </tr>
-                        <tr>
-                          <td>Alfreds Futterkiste</td>
-                          <td (click)="mapdata.show()" style="cursor: pointer;">Chennai</td>
-                          <td  style="cursor: pointer;">
-                            <i class="fas fa-edit"></i>&nbsp;
-                            <i class="fas fa-trash-alt"></i>&nbsp;
-                            <i class="fas fa-binoculars" (click)="chartdata.show()"></i>
-                          </td>
-                        </tr>
+                        <thead>
+                            <tr>
+                              <th>S.No</th>
+                              <th>Location</th>
+                              <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let post of tabledata;let myindex=index">
+                            <td>{{myindex + 1}}</td>
+                            <td (click)="mapdata.show()" style="cursor: pointer;">{{post.location }}</td>
+                            <td  style="cursor: pointer;">
+                              <i class="fas fa-edit"></i>&nbsp;
+                              <i class="fas fa-trash-alt"></i>&nbsp;
+                              <i class="fas fa-binoculars" (click)="chartdata.show()"></i>
+                            </td>
+                          </tr>
+                        </tbody>
                       </table>
                     </div>
                   </div> 

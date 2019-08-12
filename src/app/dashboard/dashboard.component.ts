@@ -3,6 +3,9 @@ import { LoginService } from '../loginmodule/loginmodule.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AmChartsService, AmChart } from '@amcharts/amcharts3-angular';
+declare var jQuery:any;
+var dt = require( 'datatables.net' );
+
 
 @Component({
   selector: 'app-dashboard',
@@ -11,8 +14,20 @@ import { AmChartsService, AmChart } from '@amcharts/amcharts3-angular';
 })
 export class DashboardComponent implements OnInit {
   tabledata:any[] =[];
-  lat = 13.0827;
-  lng = 80.2707;
+  cpu_list:any[]= [];
+  memory_list:any[]=[];
+  storage_list:any[]=[];
+  network_list:any[]=[];
+  metricform = {
+    servername: '',
+    cpuid: '',
+    memoryid:'',
+    storageid:'',
+    ipaddress:'',
+    networkid:'',
+    location:'',
+    metricid:''
+  };
 
   constructor(private loginservice: LoginService,
     private _router: Router,
@@ -26,21 +41,73 @@ export class DashboardComponent implements OnInit {
       this.loginservice.isLoggedin = true;
       this._router.navigate(['dashboard']);
       this.gettabledata();
-      this.loadMap(this.loginservice.data);
+      this.getdropdowndata();
+      // this.loadMap();
       this.loadchart();
+      this.metricform.cpuid = null;
+      this.metricform.memoryid = null;
+      this.metricform.storageid = null;
+      this.metricform.networkid = null;
     } else {
       this.loginservice.isLoggedin = false;
       this._router.navigate(['login']);
     }
   }
 
-  gettabledata(){
-    this.tabledata = this.loginservice.data
+  gettabledata() {
+    this.loginservice.getmetricadatalistgeneral().then(res=>{
+      var data = JSON.parse(JSON.stringify(res))
+      this.tabledata = data.Metrics
+      jQuery(document).ready(function(){ 
+        jQuery('#demoapptable').DataTable({                            
+          "bLengthChange": false,
+          "pageLength": 10,
+          "searching": true,
+          "bInfo": true,
+          "bSort" : true,
+          "bPaginate": true,
+          "dom": 'frtip',
+        })
+      })
+    })
   }
 
-  loadMap(data:any) {
-    this.lat = data.lat | this.lat;
-    this.lng = data.lng | this.lng;
+  getdropdowndata() {
+    this.loginservice.getdropdownlistgeneral().then(res=>{
+      var data = JSON.parse(JSON.stringify(res))
+      this.cpu_list = data.category[0].CPU
+      this.memory_list = data.category[1].Memory
+      this.storage_list = data.category[2].Storage
+      this.network_list = data.category[3].Network
+    })
+  }
+
+  showaddpop(){
+    this.metricform.metricid = null;
+    this.metricform.servername = '';
+    this.metricform.cpuid = null;
+    this.metricform.memoryid = null;
+    this.metricform.storageid = null;
+    this.metricform.ipaddress = '';
+    this.metricform.networkid = null;
+    this.metricform.location = '';
+  }
+
+  cancel(){
+    this.metricform.metricid = null;
+    this.metricform.servername = '';
+    this.metricform.cpuid = null;
+    this.metricform.memoryid = null;
+    this.metricform.storageid = null;
+    this.metricform.ipaddress = '';
+    this.metricform.networkid = null;
+    this.metricform.location = '';
+  }
+
+  savemetric(){
+    this.loginservice.addmetric(this.metricform).then(res=>{
+      console.log(res)
+    })
   }
 
   loadchart(){
