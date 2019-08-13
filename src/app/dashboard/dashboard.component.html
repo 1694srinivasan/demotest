@@ -162,11 +162,11 @@
                             <td>{{post.storage_name}}</td>
                             <td>{{post.ipaddress}}</td>
                             <td>{{post.network}}</td>
-                            <td (click)="mapdata.show();loadmap(post.lat,post.long)" style="cursor: pointer;">{{post.location }}</td>
+                            <td (click)="mapdata.show();loadmap(post.lat,post.long)" style="cursor: pointer;" title="Wanna view Map ?">{{post.location }}</td>
                             <td  style="cursor: pointer;">
-                              <i class="fas fa-edit" (click)="adddata.show();emetric(post.met_id,post.met_name,post.cpus,post.memory,post.storage,post.ipaddress,post.network,post.location)"></i>&nbsp;
-                              <i class="fas fa-trash-alt" (click)="confirmdelete.show();dmetric(post.met_id)"></i>&nbsp;
-                              <i class="fas fa-binoculars" (click)="chartdata.show()"></i>
+                              <i class="fas fa-edit" (click)="adddata.show();emetric(post.met_id,post.met_name,post.cpus,post.memory,post.storage,post.ipaddress,post.network,post.location)" title="Edit !"></i>&nbsp;
+                              <i class="fas fa-trash-alt" (click)="confirmdelete.show();dmetric(post.met_id)" title="Delete !"></i>&nbsp;
+                              <i class="fas fa-binoculars" (click)="chartdata.show()" title="Wanna view Chart ?"></i>
                             </td>
                           </tr>
                         </tbody>
