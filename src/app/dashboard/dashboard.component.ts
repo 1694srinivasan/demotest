@@ -33,6 +33,7 @@ export class DashboardComponent implements OnInit {
   };
   modaltitle: any;
   btntitle: any;
+  highchartoption: Object;
 
   constructor(private loginservice: LoginService,
     private _router: Router,
@@ -47,7 +48,6 @@ export class DashboardComponent implements OnInit {
       this._router.navigate(['dashboard']);
       this.gettabledata();
       this.getdropdowndata();
-      this.loadchart();
       this.metricform.cpuid = null;
       this.metricform.memoryid = null;
       this.metricform.storageid = null;
@@ -56,6 +56,50 @@ export class DashboardComponent implements OnInit {
       this.loginservice.isLoggedin = false;
       this._router.navigate(['login']);
     }
+  }
+
+  getchartdata(cpu: any , storage: any , network: any) {
+    let a = [{name: 'CPU', y: parseInt(cpu)}, {name: 'Storage', y: parseInt(storage)}, {name: 'Network', y: parseInt(network)}];
+    this.loadhighcharts(a);
+    this.loadchart(a);
+  }
+
+  loadhighcharts(a: any) {
+    this.highchartoption = {
+      chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Server Details',
+        style: {
+          color: '#ffffff'
+      }
+
+    },
+    tooltip: {
+        pointFormat: '{point.name}: <b>{point.y}</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: false
+            },
+            showInLegend: true,
+            style: {
+              color: '#ffffff'
+          }
+        }
+    },
+    series: [{
+        colorByPoint: true,
+        data: a,
+    }]
+    };
   }
 
   gettabledata() {
@@ -158,50 +202,11 @@ export class DashboardComponent implements OnInit {
     this.metricform.metricid = id;
   }
 
-  loadchart() {
+  loadchart(a: any) {
     const chart = this.AmCharts.makeChart( 'chartdiv', {
       'type': 'serial',
       'theme': 'dark',
-      'dataProvider': [ {
-        'country': 'USA',
-        'visits': 2025
-      }, {
-        'country': 'China',
-        'visits': 1882
-      }, {
-        'country': 'Japan',
-        'visits': 1809
-      }, {
-        'country': 'Germany',
-        'visits': 1322
-      }, {
-        'country': 'UK',
-        'visits': 1122
-      }, {
-        'country': 'France',
-        'visits': 1114
-      }, {
-        'country': 'India',
-        'visits': 984
-      }, {
-        'country': 'Spain',
-        'visits': 711
-      }, {
-        'country': 'Netherlands',
-        'visits': 665
-      }, {
-        'country': 'Russia',
-        'visits': 580
-      }, {
-        'country': 'South Korea',
-        'visits': 443
-      }, {
-        'country': 'Canada',
-        'visits': 441
-      }, {
-        'country': 'Brazil',
-        'visits': 395
-      } ],
+      'dataProvider': a,
       'valueAxes': [ {
         'gridColor': '#FFFFFF',
         'gridAlpha': 0.2,
@@ -214,14 +219,14 @@ export class DashboardComponent implements OnInit {
         'fillAlphas': 0.8,
         'lineAlpha': 0.2,
         'type': 'column',
-        'valueField': 'visits'
+        'valueField': 'y'
       } ],
       'chartCursor': {
         'categoryBalloonEnabled': false,
         'cursorAlpha': 0,
         'zoomable': false
       },
-      'categoryField': 'country',
+      'categoryField': 'name',
       'categoryAxis': {
         'gridPosition': 'start',
         'gridAlpha': 0,

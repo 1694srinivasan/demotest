@@ -149,3 +149,15 @@ agm-map {
 :host /deep/ a#demoapptable_next {
     color: white !important;
 }
+
+:host /deep/ rect.highcharts-background {
+    fill: #1f335a;
+    color: white !important;
+}
+
+:host /deep/ g.highcharts-legend-item.highcharts-pie-series.highcharts-color-0 text ,
+:host /deep/ g.highcharts-legend-item.highcharts-pie-series.highcharts-color-1 text,
+:host /deep/ g.highcharts-legend-item.highcharts-pie-series.highcharts-color-2 text {
+    fill: white !important;
+    color: white !important;
+}

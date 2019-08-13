@@ -88,7 +88,7 @@
             </div>
           </div>
           <div mdbModal #chartdata="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-dialog modal-fluid" role="document">
               <div class="modal-content">
                 <div class="modal-header">
                   <button type="button" class="close pull-right white-text" aria-label="Close" (click)="chartdata.hide()">
@@ -97,7 +97,14 @@
                   <h4 class="modal-title w-100 text-center" id="myModalLabel">Chart Data</h4>
                 </div>
                 <div class="modal-body">
-                  <div id="chartdiv" class="charts">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div id="chartdiv" class="charts">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                        <chart  [options]="highchartoption" class="charts"></chart>
+                    </div>
                   </div>
                 </div>
                 <div class="modal-footer">
@@ -166,7 +173,7 @@
                             <td  style="cursor: pointer;">
                               <i class="fas fa-edit" (click)="adddata.show();emetric(post.met_id,post.met_name,post.cpus,post.memory,post.storage,post.ipaddress,post.network,post.location)" title="Edit !"></i>&nbsp;
                               <i class="fas fa-trash-alt" (click)="confirmdelete.show();dmetric(post.met_id)" title="Delete !"></i>&nbsp;
-                              <i class="fas fa-binoculars" (click)="chartdata.show()" title="Wanna view Chart ?"></i>
+                              <i class="fas fa-binoculars" (click)="chartdata.show();getchartdata(post.cpus,post.storage,post.network)" title="Wanna view Chart ?"></i>
                             </td>
                           </tr>
                         </tbody>

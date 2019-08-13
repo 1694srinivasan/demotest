@@ -83,6 +83,13 @@ export class LoginService {
 			err => {
 				this.loadingService.hideLoading();
                 this.toastr.error( err.error['message'] ,'Hey There' )
+                localStorage.removeItem('token')
+                localStorage.removeItem('username')
+                localStorage.removeItem('user_id')
+                localStorage.removeItem('email')
+                localStorage.removeItem('is_admin')
+                this.isLoggedin = false;
+                window.location.reload();
 			});
 		})
     }
