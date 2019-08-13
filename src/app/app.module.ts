@@ -48,13 +48,13 @@ declare var require: any;
     RouterModule,
     FusionChartsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDOkFIXQcEwUolnGnylmBbaukX8NsrvCuU'
+      apiKey: 'AIzaSyBwi1ZmDwnLv2MJL6WL2Sna7md2ok4UdGw'
     }),
     // tslint:disable-next-line: max-line-length
     ChartModule.forRoot(require('highcharts/highstock'), require('highcharts/modules/exporting'), require('highcharts/modules/annotations'), require('highcharts/highcharts-more'), require('highcharts/modules/solid-gauge'), require('highcharts/modules/drilldown')),
     AmChartsModule,
     ToastrModule.forRoot({
-      timeOut: 50000,
+      timeOut: 5000,
       positionClass: 'toast-top-right',
       preventDuplicates : false,
     }),

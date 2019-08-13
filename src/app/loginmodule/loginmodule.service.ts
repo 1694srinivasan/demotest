@@ -27,6 +27,7 @@ export class LoginService {
     private getmetricadatalist: string = this.configservice.get("API_URL") + 'getmetricadata';
     private getdropdownlist: string = this.configservice.get("API_URL") + 'dropdownlist';
     private addmetrictolist: string = this.configservice.get("API_URL") + 'addmetricadata';
+    private updatemetrictolist: string = this.configservice.get("API_URL") + 'updatemetricadata';
     private deletemetrictolist: string = this.configservice.get("API_URL") + 'deletemetricadata';
 
 
@@ -134,6 +135,29 @@ export class LoginService {
         var creds = 'met_name=' + metricform.servername + '&' +'cpus=' + metricform.cpuid + '&' + 'memory=' + metricform.memoryid + '&' +'storage=' + metricform.storageid + '&' +'ipaddress=' + metricform.ipaddress + '&' + 'network=' + metricform.networkid + '&' +'location=' + metricform.location;
 		return new Promise((resolve) => {
 		this._http.post(this.addmetrictolist,creds,{headers : headers})
+		.subscribe(
+			 data => {
+                this.loadingService.hideLoading();
+                this.toastr.success(data['message'],'Hey There' )
+                resolve(data)
+			},
+			err => {
+                this.loadingService.hideLoading();
+                this.toastr.error( err.error['message'] ,'Hey There' )
+			});
+		})
+
+    }
+
+
+    updatemetric(metricform:any){
+        this.loadingService.showLoading();
+        var token = localStorage.getItem('token');
+		var username = localStorage.getItem('username');
+        var headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded' ,'Authorization' : '{"name":"' + username + '","token": "' + token + '"}'});
+        var creds = 'met_name=' + metricform.servername + '&' +'cpus=' + metricform.cpuid + '&' + 'memory=' + metricform.memoryid + '&' +'storage=' + metricform.storageid + '&' +'ipaddress=' + metricform.ipaddress + '&' + 'network=' + metricform.networkid + '&' +'location=' + metricform.location + '&' + 'met_id=' + metricform.metricid;
+		return new Promise((resolve) => {
+		this._http.put(this.updatemetrictolist,creds,{headers : headers})
 		.subscribe(
 			 data => {
                 this.loadingService.hideLoading();

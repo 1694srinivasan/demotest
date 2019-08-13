@@ -9,41 +9,60 @@
                   <button type="button" class="close pull-right white-text" aria-label="Close" (click)="adddata.hide()">
                     <span aria-hidden="true">×</span>
                   </button>
-                  <h4 class="modal-title w-100 text-center" id="myModalLabel">Add Data</h4>
+                  <h4 class="modal-title w-100 text-center" id="myModalLabel">{{modaltitle}} Data</h4>
                 </div>
                 <div class="modal-body">
-                  <form class="text-left p-5">
-                    <label class="white-text">Server Name : </label>
-                    <input type="text"  id="servername" mdbInput class="form-control mb-4 dashboardformfields" placeholder="Server Name" [(ngModel)]="metricform.servername" [ngModelOptions]="{standalone: true}" #servername="ngModel" required="">
-                    <label class="white-text">No of CPU's : </label>
-                    <select  class="browser-default custom-select mb-4 dashboardformfields" [(ngModel)]="metricform.cpuid" [ngModelOptions]="{standalone: true}" #cpuid="ngModel" required="">
-                      <option value="null">Select No of CPU's</option>
-                      <option *ngFor="let data of cpu_list" [attr.value]="data.category_item_id">{{data.item_name}}</option>
-                    </select>
-                    <label class="white-text">Total Memory : </label>
-                    <select  class="browser-default custom-select mb-4 dashboardformfields" [(ngModel)]="metricform.memoryid" [ngModelOptions]="{standalone: true}" #memoryid="ngModel" required="">
-                      <option value="null">Select Total Memory</option>
-                      <option *ngFor="let data of memory_list" [attr.value]="data.category_item_id">{{data.item_name}}</option>
-                    </select>
-                    <label class="white-text">Total Storage : </label>
-                    <select  class="browser-default custom-select mb-4 dashboardformfields" [(ngModel)]="metricform.storageid" [ngModelOptions]="{standalone: true}" #storageid="ngModel" required="">
-                      <option value="null">Select Total Storage</option>
-                      <option *ngFor="let data of storage_list" [attr.value]="data.category_item_id">{{data.item_name}}</option>
-                    </select>
-                    <label class="white-text">IP Address : </label>
-                    <input type="text"  id="ipaddress" mdbInput class="form-control mb-4 dashboardformfields" placeholder="IP Address" [(ngModel)]="metricform.ipaddress" [ngModelOptions]="{standalone: true}" #ipaddress="ngModel" required="">
-                    <label class="white-text">Network : </label>
-                    <select  class="browser-default custom-select mb-4 dashboardformfields" [(ngModel)]="metricform.networkid" [ngModelOptions]="{standalone: true}" #networkid="ngModel" required="">
-                      <option value="null">Select Network</option>
-                      <option *ngFor="let data of network_list" [attr.value]="data.category_item_id">{{data.item_name}}</option>
-                    </select>
+                  <form class="text-left">
+                    <div class="form-row mb-4">
+                      <div class="col">
+                        <label class="white-text">Server Name : </label>
+                        <input type="text"  id="servername" mdbInput class="form-control mb-4 dashboardformfields" placeholder="Server Name" [(ngModel)]="metricform.servername" [ngModelOptions]="{standalone: true}" #servername="ngModel" required="">
+                        <input type="hidden"  id="metricid" mdbInput class="form-control mb-4 dashboardformfields" placeholder="IP Address" [(ngModel)]="metricform.metricid" [ngModelOptions]="{standalone: true}" #metricid="ngModel" required="">
+                      </div>
+                      <div class="col">
+                        <label class="white-text">No of CPU's : </label>
+                        <select  class="browser-default custom-select mb-4 dashboardformfields" [(ngModel)]="metricform.cpuid" [ngModelOptions]="{standalone: true}" #cpuid="ngModel" required="">
+                          <option value="null">Select No of CPU's</option>
+                          <option *ngFor="let data of cpu_list" [attr.value]="data.category_item_id">{{data.item_name}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-row mb-4">
+                      <div class="col">
+                        <label class="white-text">Total Memory : </label>
+                        <select  class="browser-default custom-select mb-4 dashboardformfields" [(ngModel)]="metricform.memoryid" [ngModelOptions]="{standalone: true}" #memoryid="ngModel" required="">
+                          <option value="null">Select Total Memory</option>
+                          <option *ngFor="let data of memory_list" [attr.value]="data.category_item_id">{{data.item_name}}</option>
+                        </select>
+                      </div>
+                      <div class="col">
+                        <label class="white-text">Total Storage : </label>
+                        <select  class="browser-default custom-select mb-4 dashboardformfields" [(ngModel)]="metricform.storageid" [ngModelOptions]="{standalone: true}" #storageid="ngModel" required="">
+                          <option value="null">Select Total Storage</option>
+                          <option *ngFor="let data of storage_list" [attr.value]="data.category_item_id">{{data.item_name}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-row mb-4">
+                      <div class="col">
+                        <label class="white-text">IP Address : </label>
+                        <input type="text"  id="ipaddress" mdbInput class="form-control mb-4 dashboardformfields" placeholder="IP Address" [(ngModel)]="metricform.ipaddress" [ngModelOptions]="{standalone: true}" #ipaddress="ngModel" required="">      
+                      </div>
+                      <div class="col">
+                        <label class="white-text">Network : </label>
+                        <select  class="browser-default custom-select mb-4 dashboardformfields" [(ngModel)]="metricform.networkid" [ngModelOptions]="{standalone: true}" #networkid="ngModel" required="">
+                          <option value="null">Select Network</option>
+                          <option *ngFor="let data of network_list" [attr.value]="data.category_item_id">{{data.item_name}}</option>
+                        </select>
+                      </div>
+                    </div>
                     <label class="white-text">Location : </label>
                     <input type="text"  id="location" mdbInput class="form-control mb-4 dashboardformfields" placeholder="Location" [(ngModel)]="metricform.location" [ngModelOptions]="{standalone: true}" #location="ngModel" required="">
                   </form>
                 </div>
                 <div class="modal-footer">
                   <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="adddata.hide();cancel()" mdbWavesEffect>Cancel</button>
-                  <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect [disabled]="servername.errors || cpuid.errors || memoryid.errors || storageid.errors || ipaddress.errors || networkid.errors || location.errors" (click)="adddata.hide();savemetric()">Save</button>
+                  <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect [disabled]="servername.errors || cpuid.errors || memoryid.errors || storageid.errors || ipaddress.errors || networkid.errors || location.errors" (click)="adddata.hide();savemetric()">{{btntitle}}</button>
                 </div>
               </div>
             </div>
@@ -143,9 +162,9 @@
                             <td>{{post.storage_name}}</td>
                             <td>{{post.ipaddress}}</td>
                             <td>{{post.network}}</td>
-                            <td (click)="mapdata.show();loadmap(post.lat,post.lat)" style="cursor: pointer;">{{post.location }}</td>
+                            <td (click)="mapdata.show();loadmap(post.lat,post.long)" style="cursor: pointer;">{{post.location }}</td>
                             <td  style="cursor: pointer;">
-                              <i class="fas fa-edit"></i>&nbsp;
+                              <i class="fas fa-edit" (click)="adddata.show();emetric(post.met_id,post.met_name,post.cpus,post.memory,post.storage,post.ipaddress,post.network,post.location)"></i>&nbsp;
                               <i class="fas fa-trash-alt" (click)="confirmdelete.show();dmetric(post.met_id)"></i>&nbsp;
                               <i class="fas fa-binoculars" (click)="chartdata.show()"></i>
                             </td>
