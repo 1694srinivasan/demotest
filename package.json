@@ -36,7 +36,7 @@
     "core-js": "^2.5.4",
     "datatables.net": "^1.10.16",
     "datatables.net-dt": "^1.10.16",
-    "express": "^4.15.4",
+    "express": "^4.18.2",
     "fusioncharts": "^3.14.0-sr.1",
     "gzippo": "^0.2.0",
     "hammerjs": "^2.0.8",
